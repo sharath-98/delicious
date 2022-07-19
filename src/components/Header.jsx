@@ -44,7 +44,7 @@ const Header = () => {
     }
 
   return (
-    <header className='fixed z-50 w-screen p-3 px-4 md:px-16 md:p:6 bg-green-100'>
+    <header className='fixed z-50 w-screen p-3 px-4 md:px-16 md:p:6 bg-white'>
         <div className='hidden md:flex w-full h-full justify-between item-center'>
             <Link to='/' className='flex items-center gap-3'>
                 <img src={Logo} className='w-12 object-cover'/>
@@ -77,15 +77,15 @@ const Header = () => {
                     {
                         menu && (
                             <div 
-                            className='flex flex-col gap-3 w-60 px-2 py-2 right-0.5 bg-green-200 shadow-xl rounded-lg absolute'>
+                            className='flex flex-col gap-3 w-60 px-2 py-2 right-0.5 bg-white shadow-xl rounded-lg absolute'>
                             {
                                 user && user.email === "sharathchander.p@gmail.com" && (
                                     <Link to = '/newItem'>
-                                        <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-green-100'><MdAdd/>Add New Item</p>
+                                        <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-white'><MdAdd/>Add New Item</p>
                                     </Link>
                                 )
                             }
-                            <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-green-100' onClick={handleLogout}><MdLogout/>Logout</p>
+                            <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-white' onClick={handleLogout}><MdLogout/>Logout</p>
                         </div>
                         )
                     }
@@ -115,18 +115,18 @@ const Header = () => {
                     {
                         menu && (
                             <div 
-                            className='flex flex-col gap-3 w-60 px-2 py-2 right-0.5 bg-green-200 shadow-xl rounded-lg absolute'>
+                            className='flex flex-col gap-3 w-60 px-2 py-2 right-0.5 bg-white shadow-xl rounded-lg absolute'>
                             <ul className='px-4 py-1 flex flex-col gap-3'>
-                                <li className='py-1 flex items-center gap-3 cursor-pointer hover:bg-green-100'><MdMenu/>Menu</li>
-                                <li className='py-1 flex items-center gap-3 cursor-pointer hover:bg-green-100'><MdHome/>Home</li>
-                                <li  className='py-1 flex items-center gap-3 cursor-pointer hover:bg-green-100'><MdApartment/>Location</li>
-                                <li className='py-1 flex items-center gap-3 cursor-pointer hover:bg-green-100'><MdInfo/>About Us</li>
+                                <li className='py-1 flex items-center gap-3 cursor-pointer hover:bg-white'><MdMenu/>Menu</li>
+                                <li className='py-1 flex items-center gap-3 cursor-pointer hover:bg-white'><MdHome/>Home</li>
+                                <li  className='py-1 flex items-center gap-3 cursor-pointer hover:bg-white'><MdApartment/>Location</li>
+                                <li className='py-1 flex items-center gap-3 cursor-pointer hover:bg-white'><MdInfo/>About Us</li>
                             </ul>
                             {
                                 
                                 user && user.email === "sharathchander.p@gmail.com" && (
                                     <Link to = '/newItem'>
-                                        <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-green-100'><MdAdd/>Add New Item</p>
+                                        <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-white'><MdAdd/>Add New Item</p>
                                     </Link>
                                 )
                             }

@@ -8,9 +8,9 @@ import {AnimatePresence} from 'framer-motion'
 function App() {
   return (
     <AnimatePresence exitBeforeEnter>
-      <div className="w-screen h-screen flex flex-col">
+      <div className="w-screen h-screen flex flex-col bg-white">
       <Header/>
-      <main className='mt-16 md:mt-24 p-8 w-full'>
+      <main className='mt-16 md:mt-23 px-4 md:px-16 py-4 w-full '>
         <Routes>
           <Route path='/' element={
             <Fragment>
