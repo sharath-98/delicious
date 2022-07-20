@@ -2,6 +2,8 @@ import React from 'react'
 import delivery from '../img/delivery.png'
 import background from '../img/Bg.png'
 import './Home.css'
+import { imageData } from './data'
+import CardImage from './CardImage'
 
 const Home = () => {
   return (
@@ -24,9 +26,17 @@ const Home = () => {
         </p>
         <button className='text-white w-full px-4 py-3 md:w-auto transition-all  duration-100 rounded-md hover:shadow-lg ease-in-out bg-gradient-to-br from-orange-300 to-orange-500'>Order Now</button>
       </div>
-      <div className='py-2 flex items-center w-full h-full '>
-            <img src={background} className="ml-auto sm:mr-auto home_left_image h-full"/>
-            
+      <div className='py-2 relative flex-1 flex items-center home_left_image'>
+            <img src={background} className="ml-auto w-full lg:w-auto lg:h-full"/>
+            <div className='w-full h-full flex-wrap gap-4 absolute left-0 top-0 px-32 flex flex-col items-center justify-center drop-shadow-lg'>
+                {
+                    imageData && imageData.map((item) => 
+                        (
+                            <CardImage key={item.id} src={item.src} id={item.id} name={item.name} desc = {item.desc} cost={item.cost}/>
+                        )
+                    )
+                }
+            </div>
       </div>
     </section>
   )
