@@ -9,3 +9,43 @@ export const imageData = [
     {id:2, name:'Meat', desc:'Spicy Chicken', cost:'7.75', src: chicken},
     {id:3, name:'Fish', desc:'Fresh Tilapia', cost:'10.15', src: fish},
 ]
+
+export const categories = [
+  {
+    id: 1,
+    name: "Chicken",
+    url: "chicken"
+  },
+  {
+    id: 2,
+    name: "Thai Curry",
+    url: "curry"
+  },
+
+  {
+    id: 3,
+    name: "Fish",
+    url: "fish"
+  },
+
+  {
+    id: 4,
+    name: "Rice",
+    url: "rice"
+  },
+  {
+    id: 5,
+    name: "Fruits",
+    url: "fruits"
+  },
+  {
+    id: 6,
+    name: "Desserts",
+    url: "icecream"
+  },
+  {
+    id: 7,
+    name: "Beverages",
+    url: "chicken"
+  },
+];

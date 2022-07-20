@@ -33,6 +33,10 @@ const Header = () => {
         }
     };
 
+    const handleNewItem= () =>{
+        setMenu(!menu);
+    }
+
     const handleLogout = () =>{
         localStorage.clear();
         dispatch({
@@ -81,7 +85,7 @@ const Header = () => {
                             {
                                 user && user.email === "sharathchander.p@gmail.com" && (
                                     <Link to = '/newItem'>
-                                        <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-white'><MdAdd/>Add New Item</p>
+                                        <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-white' onClick={handleNewItem}><MdAdd/>Add New Item</p>
                                     </Link>
                                 )
                             }
@@ -126,7 +130,7 @@ const Header = () => {
                                 
                                 user && user.email === "sharathchander.p@gmail.com" && (
                                     <Link to = '/newItem'>
-                                        <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-white'><MdAdd/>Add New Item</p>
+                                        <p className='px-4 py-1 flex items-center gap-3 cursor-pointer hover:bg-white' onClick={handleNewItem}><MdAdd/>Add New Item</p>
                                     </Link>
                                 )
                             }
