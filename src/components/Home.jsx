@@ -27,8 +27,8 @@ const Home = () => {
         <button className='text-white w-full px-4 py-3 md:w-auto transition-all  duration-100 rounded-md hover:shadow-lg ease-in-out bg-gradient-to-br from-orange-300 to-orange-500'>Order Now</button>
       </div>
       <div className='py-2 relative flex items-center'>
-            <img src={background} className="ml-auto w-full h-[420px] lg:w-auto lg:h-[650px]"/>
-            <div className='absolute w-[100%] h-full gap-4 sm:ml-auto md:ml-auto mr-auto  top-0 flex md:flex-col flex-wrap  items-center justify-around drop-shadow-lg'>
+            <img src={background} className="ml-auto w-full h-[550px] lg:w-auto lg:h-[650px]"/>
+            <div className='absolute w-[100%] h-full gap-4 lg:px-32 sm:ml-auto md:ml-auto mr-auto  top-0 flex md:flex-col flex-wrap  items-center justify-around drop-shadow-lg'>
                 {
                     imageData && imageData.map((item) => 
                         (
