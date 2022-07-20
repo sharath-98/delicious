@@ -7,7 +7,7 @@ import CardImage from './CardImage'
 
 const Home = () => {
   return (
-    <section id="home" className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full'>
+    <section id="home" className='grid grid-cols-1 md:grid-cols-2 gap-5 w-full'>
       <div className='py-2 flex-1 flex-col gap-5 flex items-start '>
         <div className='flex gap-3 items-center justify-center bg-orange-100 px-4 p-2 rounded-full'>
          <p className='text-base font-semibold text-orange-600'>
@@ -26,9 +26,9 @@ const Home = () => {
         </p>
         <button className='text-white w-full px-4 py-3 md:w-auto transition-all  duration-100 rounded-md hover:shadow-lg ease-in-out bg-gradient-to-br from-orange-300 to-orange-500'>Order Now</button>
       </div>
-      <div className='py-2 relative flex-1 flex items-center home_left_image'>
-            <img src={background} className="ml-auto w-full lg:w-auto lg:h-full"/>
-            <div className='w-full h-full flex-wrap gap-4 absolute left-0 top-0 px-32 flex flex-col items-center justify-center drop-shadow-lg'>
+      <div className='py-2 relative flex items-center'>
+            <img src={background} className="ml-auto w-full h-[420px] lg:w-auto lg:h-[650px]"/>
+            <div className='absolute w-[100%] h-full gap-4 sm:ml-auto md:ml-auto mr-auto  top-0 flex md:flex-col flex-wrap  items-center justify-around drop-shadow-lg'>
                 {
                     imageData && imageData.map((item) => 
                         (
