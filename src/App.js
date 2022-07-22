@@ -4,8 +4,26 @@ import './App.css';
 import { CreateContainer, MainContainer } from './components';
 import Header from './components/Header';
 import {AnimatePresence} from 'framer-motion'
+import { useStateValue } from './context/StateProvider';
+import { getMenu } from './utils/firebaseFunctions';
+import { useEffect } from 'react';
+import { actionType } from './context/Reducer';
 
 function App() {
+  const [{menu}, dispatch] = useStateValue();
+  const fetchMenuItems = async() =>{
+    await getMenu().then((response) => {
+      dispatch({
+        type: actionType.SET_MENU,
+        menu: response
+      })
+    })
+  }
+
+  useEffect(()=>{
+    fetchMenuItems();
+  },[]);
+
   return (
     <AnimatePresence exitBeforeEnter>
       <div className="w-screen h-screen flex flex-col bg-white">

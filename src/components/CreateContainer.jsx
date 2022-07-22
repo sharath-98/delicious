@@ -6,7 +6,10 @@ import {Md, MdAttachMoney, MdCategory, MdCloudUpload, MdDelete, MdDescription, M
 import Loader from './Loader'
 import {deleteObject, getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage'
 import {storage} from '../firebase'
-import { saveNewItem } from '../utils/firebaseFunctions'
+import { getMenu, saveNewItem } from '../utils/firebaseFunctions'
+
+import { actionType } from '../context/Reducer';
+import { useStateValue } from '../context/StateProvider';
 
 const CreateContainer = () => {
   const [name, setName] = useState('');
@@ -20,6 +23,17 @@ const CreateContainer = () => {
   const [warning, setWarning] = useState('Danger');
   const [msg, setMsg] = useState('');
   const [image, setImage] = useState(null);
+
+  const [{menu}, dispatch] = useStateValue();
+
+  const fetchMenuItems = async () =>{
+    await getMenu().then((response) => {
+      dispatch({
+        type: actionType.SET_MENU,
+        menu: response
+      })
+    })
+  }
 
   const handleUploadImage = (e) =>{
     setprogress(true)
@@ -113,6 +127,7 @@ const CreateContainer = () => {
         setprogress(false);
       }, 4000)
     }
+    fetchMenuItems();
   }
 
   const clearAll = () =>{
