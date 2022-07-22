@@ -4,6 +4,9 @@ import {motion} from 'framer-motion'
 import {categories} from '../components/data'
 import {Md, MdAttachMoney, MdCategory, MdCloudUpload, MdDelete, MdDescription, MdFastfood, MdFoodBank, MdMoney, MdPriceChange, MdPriceCheck} from 'react-icons/md'
 import Loader from './Loader'
+import {deleteObject, getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage'
+import {storage} from '../firebase'
+import { saveNewItem } from '../utils/firebaseFunctions'
 
 const CreateContainer = () => {
   const [name, setName] = useState('');
@@ -15,21 +18,110 @@ const CreateContainer = () => {
 
   const [progress, setprogress] = useState(false);
   const [warning, setWarning] = useState('Danger');
-  const [msg, setMsg] = useState(null);
+  const [msg, setMsg] = useState('');
   const [image, setImage] = useState(null);
 
   const handleUploadImage = (e) =>{
     setprogress(true)
     const imageFile = e.target.files[0];
-    console.log(imageFile)
+    const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    uploadTask.on('state_changed', (snapshot) => {
+      const uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+    }, (error) => {
+      console.log(error);
+      setFields(true)
+      setMsg("Error while uploading image. Please Try again ⚠️!");
+      setWarning("Danger");
+      setTimeout(()=>{
+        setFields(false);
+        setprogress(false);
+      }, 4000)
+    }, ()=> {
+      getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+        setImage(downloadURL)
+        setprogress(false)
+        setFields(true)
+        setMsg("Image Uploaded Successfully 😊");
+        setWarning('Success')
+        setTimeout(() => {
+          setFields(false);
+          setprogress(false);
+        }, 4000)
+      })
+    });
   }
   
   const handleDeleteImage = () =>{
-
+    setprogress(true)
+    const deleteRef = ref(storage, image);
+    deleteObject(deleteRef).then(()=>{
+      setImage(null)
+      setprogress(false)
+      setFields(true)
+      setMsg("Image Deleted Successfully 😊");
+      setWarning('Success')
+      setTimeout(() => {
+        setFields(false);
+        setprogress(false);
+      }, 4000)
+    })
   }
 
   const handleSave = () =>{
+    setprogress(true)
+    try {
+      if(!name || !calories || !desc || !cost || !category || !image)
+      {
+        setFields(true)
+        setMsg("Please fill all the fields");
+        setWarning("Danger");
+        setTimeout(()=>{
+          setFields(false);
+          setprogress(false);
+        }, 4000)
+      }
+      else{
+        const data = {
+          id:`${Date.now()}-${name}`,
+          title: name,
+          imageURL : image,
+          category : category,
+          cost: cost,
+          desc : desc,
+          qty : 1
+        }
+        saveNewItem(data);
+        setprogress(false)
+        setFields(true);
+        clearAll();
+        setMsg("Data Saved Successfully 😊");
+        setWarning('Success')
+        setTimeout(() => {
+          setFields(false);
+          setprogress(false);
+        }, 4000)
 
+      }
+    } catch (error) {
+      console.log(error);
+      setFields(true)
+      setMsg("Error while Saving New Item. Please Try again ⚠️!");
+      setWarning("Danger");
+      setTimeout(()=>{
+        setFields(false);
+        setprogress(false);
+      }, 4000)
+    }
+  }
+
+  const clearAll = () =>{
+    setName("")
+    setCalories("other")
+    setCategory(null)
+    setCost('')
+    setImage(null)
+    setDesc('')
   }
 
   return (
@@ -42,7 +134,6 @@ const CreateContainer = () => {
               animate={{opacity:1}}
               exit={{opacity:0}}
               className={`w-full p-2 font-semibold text-center ${warning==='Danger' ? "bg-red-300" : 'bg-green-600'}`}>
-              Something Wrong!!!
               {msg}
             </motion.p>
         )}
@@ -94,7 +185,7 @@ const CreateContainer = () => {
                       <img src={image} className="w-full h-full object-cover" />
                       <button type="button" className='absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-lg
                       duration-500 transition-all ease-in-out' onClick={handleDeleteImage}>
-                        <MdDelete className='text-white'/>UnSelect Image
+                        <MdDelete className='text-white'/>
                       </button>
                     </div>
                   </>
