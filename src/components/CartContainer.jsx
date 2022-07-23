@@ -15,7 +15,11 @@ const CartContainer = () => {
     }
 
   return (
-    <div className='top-0 fixed right-0 w-full md:w-[455px] h-[100vh] bg-orange-100 drop-shadow-lg
+    <motion.div 
+    initial={{opacity:0, x:200}}
+    animate={{opacity:1, x:0}}
+    exit={{opacity:0, x:200}}
+     className='top-0 fixed right-0 w-full md:w-[455px] h-[100vh] bg-orange-100 drop-shadow-lg
     flex flex-col items-center z-[101]'>
         <div className='w-full cursor-pointer flex items-center justify-between p-2'>
             <motion.div whileTap={{scale:0.75}} >
@@ -84,7 +88,7 @@ const CartContainer = () => {
                 </motion.button>
              </div>
         </div>
-    </div>
+    </motion.div>
   )
 }
 
