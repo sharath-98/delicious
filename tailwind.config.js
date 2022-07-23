@@ -17,6 +17,9 @@ module.exports = {
         cardOverlay:"rgba(256,256,256,0.4)",
         card:"rgba(256,256,256,0.8)",
         rowColor: 'rgba(255, 131, 0 , 0.1)',
+        cart: '#282a2c',
+        cartItem: '#2e3033',
+        cartTotal: '#343739',
       },
       screens:{
         sm:"640px",

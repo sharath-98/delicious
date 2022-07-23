@@ -3,9 +3,12 @@ import { useEffect } from 'react'
 import { MdFastfood } from 'react-icons/md'
 import { categories } from './data'
 import {motion} from 'framer-motion'
+import RowContainer from './RowContainer'
+import { useStateValue } from '../context/StateProvider'
 
 const MenuContainer = () => {
     const [filterMenu, setFilterMenu] = useState('chicken')
+    const[{menu}, dispatch] = useStateValue();
     useEffect(()=>{
 
     }, [filterMenu]);
@@ -35,10 +38,13 @@ const MenuContainer = () => {
                             `}/>
                         </div>
                         <p className={`text-sm ${filterMenu === category.url ? "text-white":"text-orange-300"}
-                         group-hover:text-white`}>{category.url}</p>
+                         group-hover:text-white`}>{category.name}</p>
                     </motion.div>
                 )))
             }
+          </div>
+          <div className='w-full '>
+            <RowContainer scrollableFlag={false} data={menu?.filter(item => item.category === filterMenu)}/>
           </div>
         </div>
     </section>

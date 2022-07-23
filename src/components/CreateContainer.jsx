@@ -134,7 +134,6 @@ const CreateContainer = () => {
   const clearAll = () =>{
     setName("")
     setCalories("")
-    setCategory(null)
     setCost('')
     setImage(null)
     setDesc('')
