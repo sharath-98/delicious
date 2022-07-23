@@ -2,21 +2,32 @@ import React from 'react'
 import { MdBackspace, MdDeleteOutline, MdOutlineKeyboardBackspace } from 'react-icons/md'
 import {motion} from 'framer-motion'
 import {RiAddLine, RiRefreshFill, RiSubtractLine} from 'react-icons/ri'
+import { useStateValue } from '../context/StateProvider'
+import { actionType } from '../context/Reducer'
 
 const CartContainer = () => {
+   const [{showCheckout}, dispatch] = useStateValue();
+    const handleBasket =() =>{
+        dispatch({
+            type : actionType.SET_CHECKOUT_SHOW,
+            showCheckout: !showCheckout
+        })
+    }
+
   return (
     <div className='top-0 fixed right-0 w-full md:w-[455px] h-[100vh] bg-orange-100 drop-shadow-lg
     flex flex-col items-center z-[101]'>
-        <div className='w-full cursor-pointer flex items-center justify-between p-4'>
+        <div className='w-full cursor-pointer flex items-center justify-between p-2'>
             <motion.div whileTap={{scale:0.75}} >
-                <MdOutlineKeyboardBackspace className='text-4xl text-textColor'/>
+                <MdOutlineKeyboardBackspace onClick={handleBasket} className='text-4xl text-textColor'/>
             </motion.div>
             <p className='text-textColor text-2xl font-semibold'>Cart</p>
             
-        <motion.button whileTap={{scale:0.75}} className='flex items-center justify-center  gap-2 text-white w-full px-2 py-2 md:w-auto transition-all  duration-100 
-            rounded-md text-sm hover:shadow-lg ease-in-out bg-gradient-to-br from-orange-300 to-orange-500'>
-            Remove All <MdDeleteOutline/>
-        </motion.button>
+            <motion.button whileTap={{scale:0.75}} className='flex w-30 items-center justify-center  gap-2 text-white
+                px-2 py-2 md:w-auto transition-all  duration-100 
+                rounded-md text-sm hover:shadow-lg ease-in-out bg-gradient-to-br from-orange-300 to-orange-500'>
+                Remove All <MdDeleteOutline/>
+            </motion.button>
         </div>
 
         <div className='w-full h-full bg-orange-300 flex flex-col rounded-t-[3rem]'>

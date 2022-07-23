@@ -13,7 +13,7 @@ import { useState } from 'react'
 const Header = () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
-    const [{user}, dispatch] = useStateValue();
+    const [{user, showCheckout}, dispatch] = useStateValue();
     const [menu, setMenu] = useState(false)
 
     const handleLogin = async () => {
@@ -35,6 +35,13 @@ const Header = () => {
 
     const handleNewItem= () =>{
         setMenu(!menu);
+    }
+
+    const handleBasket =() =>{
+        dispatch({
+            type:actionType.SET_CHECKOUT_SHOW,
+            showCheckout: !showCheckout
+        })
     }
 
     const handleLogout = () =>{
@@ -66,7 +73,7 @@ const Header = () => {
                     <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all cursor-pointer ease-in-out'>About Us</li>
                 </motion.ul>
                 <div className='relative flex items-center justify-center '>
-                    <MdShoppingBasket className=' text-textColor cursor-pointer text-2xl'/>    
+                    <MdShoppingBasket onClick={handleBasket} className=' text-textColor cursor-pointer text-2xl'/>    
                     <div className='w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-3.5 -right-2'>
                         <p className='text-xs text-white font-bold'>1</p>
                     </div>
@@ -97,7 +104,7 @@ const Header = () => {
             </div>
         </div>
         {/* For mobile view */}
-        <div className='flex md:hidden w-full h-full items-start justify-between'>
+        <div onClick={handleBasket} className='flex md:hidden w-full h-full items-start justify-between'>
             <div  className='relative w-10 h-10 flex items-center justify-center '>
                 <MdShoppingBasket className=' text-textColor cursor-pointer text-2xl'/>    
                 <div className='w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-1 -right-1'>

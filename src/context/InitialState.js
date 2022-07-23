@@ -4,5 +4,6 @@ const userInfo = fetchUser();
 
 export const initialState = {
     user: userInfo,
-    menu: null
+    menu: null,
+    showCheckout: false
 }

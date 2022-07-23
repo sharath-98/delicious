@@ -10,12 +10,12 @@ import MenuContainer from './MenuContainer'
 import CartContainer from './CartContainer'
 
 const MainContainer = () => {
-  const [{menu}, dispatch] = useStateValue();
+  const [{menu, showCheckout}, dispatch] = useStateValue();
   const [scroll, setScroll] = useState(0);
 
   useEffect(()=>{
 
-  }, [scroll])
+  }, [scroll, showCheckout])
 
 
   return (
@@ -42,7 +42,7 @@ const MainContainer = () => {
       </section>
 
       <MenuContainer key='menuContainer'/>
-      <CartContainer/>
+      {showCheckout && (<CartContainer/>)}
     </div>
   )
 }
