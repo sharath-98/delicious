@@ -6,6 +6,7 @@ import RowContainer from './RowContainer'
 import { useStateValue } from '../context/StateProvider'
 import { useRef } from 'react'
 import { useEffect } from 'react'
+import MenuContainer from './MenuContainer'
 
 const MainContainer = () => {
   const [{menu}, dispatch] = useStateValue();
@@ -19,7 +20,8 @@ const MainContainer = () => {
   return (
     <div className='w-full mt-4 flex flex-col items-center justify-center'>
       <Home/>
-      <section className='w-full my-7'>
+
+      <section className='w-full my-6'>
         <div className='w-full flex items-center justify-between'>
           <p className='text-2xl font-semibold text-headingColor capitalize relative before:absolute
            before:rounded-lg before:content before:w-24 before:h-1 before:-bottom-2 before:left-0
@@ -37,6 +39,9 @@ const MainContainer = () => {
         </div>
         <RowContainer scrollVal = {scroll} scrollableFlag = {true} data = {menu?.filter(item => item.category === "fruits")}/>
       </section>
+
+      <MenuContainer key='menuContainer'/>
+
     </div>
   )
 }
