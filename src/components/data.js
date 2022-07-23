@@ -12,6 +12,11 @@ export const imageData = [
 
 export const categories = [
   {
+    id: 0,
+    name: "Choose Category",
+    url: "other"
+  },
+  {
     id: 1,
     name: "Chicken",
     url: "chicken"
@@ -46,6 +51,6 @@ export const categories = [
   {
     id: 7,
     name: "Beverages",
-    url: "chicken"
+    url: "beverages"
   },
 ];

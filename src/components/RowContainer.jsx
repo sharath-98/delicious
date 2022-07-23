@@ -2,31 +2,45 @@ import React from 'react'
 import { MdShoppingBasket } from 'react-icons/md';
 import { useStateValue } from '../context/StateProvider'
 import {motion} from 'framer-motion'
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
-const RowContainer = ({scrollableFlag}) => {
-  
+const RowContainer = ({scrollableFlag, data, scrollVal}) => {
+   
   const [{menu}, dispatch] = useStateValue();
+  const rowContainer = useRef();
+
+  useEffect(()=>{
+    rowContainer.current.scrollLeft += scrollVal;
+  }, [scrollVal]);
+
   return (
-    <div className = {`w-full my-12 
-    ${scrollableFlag ? "overflow-x-scroll" : "overflow-x-hidden"}`}>
-        <div className='w-300 my-12 bg-cardOverlay z-0 rounded-lg p-5 md:w-[330px] h-auto backdrop-blur-lg hover:drop-shadow-lg'>
-            <div className='w-full flex items-center justify-between'>
-                <motion.img whileHover = {{scale:1.2}} className='w-40 -mt-8' src="https://firebasestorage.googleapis.com/v0/b/delicious-e372a.appspot.com/o/Images%2F1658529177042-avatar.png?alt=media&token=9a6cbe00-29a3-4b61-994e-5ab8920f35b1"/>
-                <motion.div whileTap = {{scale:0.75}} className='w-10 h-10 flex items-center justify-center cursor-pointer hover:shadow-lg rounded-full bg-red-400'>
-                    <MdShoppingBasket className='text-white'/>
-                </motion.div>
-            </div>
-            <div className='w-full flex flex-col items-end justify-end'>
-                <p className='text-textColor text-lg font-semibold'>Name</p>
-                <p className='mt-1 text-md text-gray-400'>Desc</p>
-                <p className='mt-1 text-md text-gray-400'>30 Calories</p>
-                <div className='flex items-center gap-8'>
-                    <p className='text-lg text-textColor font-semibold'>
-                        <span className='text-sm text-red-500'>$ </span>4.75
-                    </p>
+    <div ref={rowContainer}
+    className = {`w-full my-4 flex items-center gap-3 scroll-smooth
+    ${scrollableFlag ? "overflow-x-scroll scrollbar-none" : "overflow-x-hidden flex flex-wrap"}`}>
+        {
+            data && data.map((item) => (
+                <div key={item.id} className='w-300 gap-3 min-w-[300px]  my-12 bg-cardOverlay z-0 rounded-lg
+                 p-5 md:w-[310px] md:min-w-[310px] h-[300px] backdrop-blur-lg hover:drop-shadow-lg'>
+                    <div className='w-full flex items-center justify-between'>
+                        <motion.img whileHover = {{scale:1.2}} className='w-40 h-[140px] -mt-8' src={item?.imageURL}/>
+                        <motion.div whileTap = {{scale:0.75}} className='w-10 h-10 flex items-center justify-center cursor-pointer hover:shadow-lg rounded-full bg-red-400'>
+                            <MdShoppingBasket className='text-white'/>
+                        </motion.div>
+                    </div>
+                    <div className='w-full flex flex-col items-end justify-end'>
+                        <p className='text-textColor text-lg font-semibold'>{item?.title}</p>
+                        <p className='mt-1 text-sm text-gray-400'>{item?.desc}</p>
+                        <p className='mt-1 text-md text-gray-400'>{item?.calories} Calories</p>
+                        <div className='flex items-center gap-8'>
+                            <p className='text-lg text-textColor font-semibold'>
+                                <span className='text-sm text-red-500'>$ </span>{item?.cost}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            ))
+        }
     </div>
   )
 }

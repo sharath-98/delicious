@@ -101,6 +101,7 @@ const CreateContainer = () => {
           title: name,
           imageURL : image,
           category : category,
+          calories : calories,
           cost: cost,
           desc : desc,
           qty : 1
@@ -132,7 +133,7 @@ const CreateContainer = () => {
 
   const clearAll = () =>{
     setName("")
-    setCalories("other")
+    setCalories("")
     setCategory(null)
     setCost('')
     setImage(null)
@@ -165,7 +166,8 @@ const CreateContainer = () => {
            onChange={(event)=>setCategory(event.target.value)}
            className="w-full h-full text-lg placeholder:text-gray-400 font-semibold p-1 bg-transparent  text-textColor border-gray-300 outline-none" 
            >
-            <option className='text-textColor border-gray-300 outline-none' value={"other"}>Choose Category</option>
+            {/* <option className='text-textColor border-gray-300 outline-none' value={""}>Choose Category</option>
+             */}
             {
               categories && categories.map((item)=>(
                 <option key={item.id} value={item.url} className='text-base border-0 outline-none bg-white text-textColor'>
