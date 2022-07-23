@@ -24,7 +24,7 @@ const MainContainer = () => {
           <p className='text-2xl font-semibold text-headingColor capitalize relative before:absolute
            before:rounded-lg before:content before:w-24 before:h-1 before:-bottom-2 before:left-0
            before:bg-gradient-to-br from-orange-300 to-orange-500 transition-all ease-in-out duration-100'>
-            Fresh and Organic Fruits
+            Fresh & Organic Fruits
           </p>
           <div className='hidden md:flex gap-3 items-center'>
             <motion.div whileTap={{scale:0.75}} className='w-8 h-8 rounded-lg cursor-pointer hover:shadow-lg transition-all duration-100 bg-orange-300 hover:bg-orange-500 flex items-center justify-center'>

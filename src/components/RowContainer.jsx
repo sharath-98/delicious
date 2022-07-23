@@ -20,7 +20,7 @@ const RowContainer = ({scrollableFlag, data, scrollVal}) => {
     ${scrollableFlag ? "overflow-x-scroll scrollbar-none" : "overflow-x-hidden flex flex-wrap"}`}>
         {
             data && data.map((item) => (
-                <div key={item.id} className='w-300 gap-3 min-w-[300px]  my-12 bg-cardOverlay z-0 rounded-lg
+                <div key={item.id} className='w-300 flex flex-col items-center justify-between gap-3 min-w-[300px]  my-12 bg-cardOverlay z-0 rounded-lg
                  p-5 md:w-[310px] md:min-w-[310px] h-[300px] backdrop-blur-lg hover:drop-shadow-lg'>
                     <div className='w-full flex items-center justify-between'>
                         <motion.img whileHover = {{scale:1.2}} className='w-40 h-[140px] -mt-8' src={item?.imageURL}/>
