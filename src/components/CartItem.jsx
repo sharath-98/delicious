@@ -12,7 +12,7 @@ const CartItem = ({data}) => {
     const [{cartItems}, dispatch] = useStateValue();
     const [items, setitems] = useState([])
     const [flag, setflag] = useState(0)
-    const [total, settotal] = useState(5.9)
+    const [total, settotal] = useState(0)
     
     const cartDispatch = () =>{
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -47,7 +47,7 @@ const CartItem = ({data}) => {
         else{
             if(qty == 1)
             {
-                items = cartItems.filter((item)=>item.id !== id);
+                setitems(cartItems.filter((item)=>item.id !== id));
                 cartDispatch();
                 setflag(flag+1)
             }

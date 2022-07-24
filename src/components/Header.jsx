@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from "../img/logo.png"
+import Logo from "../img/chef1.png"
 import Avatar from "../img/avatar.png"
 import {MdAdd, MdApartment, MdHome, MdInfo, MdLogout, MdMenu, MdShoppingBasket} from "react-icons/md"
 import { motion } from 'framer-motion'
@@ -58,8 +58,8 @@ const Header = () => {
     <header className='fixed z-50 w-screen p-3 px-4 md:px-16 md:p:6 bg-white'>
         <div className='hidden md:flex w-full h-full justify-between item-center'>
             <Link to='/' className='flex items-center gap-3'>
-                <img src={Logo} className='w-12 object-cover'/>
-                <p className='text-headingColor text-xl font-bold'>City</p>
+                <img src={Logo} className='w-20 object-cover'/>
+                <p className='text-headingColor text-xl font-bold'>Delicious</p>
             </Link>
             <div className="flex items-center gap-10">
                 <motion.ul 
@@ -122,8 +122,8 @@ const Header = () => {
                 }
             </div>
             <Link to='/' className='flex items-center gap-3'>
-                <img src={Logo} className='w-10 object-cover'/>
-                <p className='text-headingColor text-xl font-bold'>City</p>
+                <img src={Logo} className='w-12 object-cover'/>
+                <p className='text-headingColor text-xl font-bold'>Delicious</p>
             </Link>
             
             <motion.div
