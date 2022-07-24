@@ -1,19 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdShoppingBasket } from 'react-icons/md';
 import { useStateValue } from '../context/StateProvider'
 import {motion} from 'framer-motion'
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import NoItems from '../img/NotFound.svg'
+import { actionType } from '../context/Reducer'
 
 const RowContainer = ({scrollableFlag, data, scrollVal}) => {
    
-  const [{menu}, dispatch] = useStateValue();
+  const [{menu, cartItems}, dispatch] = useStateValue();
   const rowContainer = useRef();
+  const [items, setItems] = useState([])
 
   useEffect(()=>{
     rowContainer.current.scrollLeft += scrollVal;
-  }, [scrollVal]);
+    addToCart()
+  }, [scrollVal, items]);
+
+  const addToCart= (item)=>{
+    
+    dispatch({
+        type: actionType.SET_CART_ITEMS,
+        cartItems : items
+    })
+    localStorage.setItem('cartItems', JSON.stringify(items));
+  }
 
   return (
     <div ref={rowContainer}
@@ -25,7 +37,7 @@ const RowContainer = ({scrollableFlag, data, scrollVal}) => {
                  p-5 md:w-[310px] md:min-w-[310px] h-[300px] backdrop-blur-lg hover:drop-shadow-lg'>
                     <div className='w-full h-[180px] flex items-center justify-between'>
                         <motion.img whileHover = {{scale:1.2}} className='w-40 h-full -mt-8' src={item?.imageURL}/>
-                        <motion.div whileTap = {{scale:0.75}} className='w-10 h-10 flex items-center justify-center cursor-pointer hover:shadow-lg rounded-full bg-red-400'>
+                        <motion.div onClick={()=>{setItems([...cartItems, item]);}} whileTap = {{scale:0.75}}  className='w-10 h-10 flex items-center justify-center cursor-pointer hover:shadow-lg rounded-full bg-red-400'>
                             <MdShoppingBasket className='text-white'/>
                         </motion.div>
                     </div>

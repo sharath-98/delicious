@@ -13,7 +13,7 @@ import { useState } from 'react'
 const Header = () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
-    const [{user, showCheckout}, dispatch] = useStateValue();
+    const [{user, showCheckout, cartItems}, dispatch] = useStateValue();
     const [menu, setMenu] = useState(false)
 
     const handleLogin = async () => {
@@ -74,9 +74,14 @@ const Header = () => {
                 </motion.ul>
                 <div className='relative flex items-center justify-center '>
                     <MdShoppingBasket onClick={handleBasket} className=' text-textColor cursor-pointer text-2xl'/>    
-                    <div className='w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-3.5 -right-2'>
-                        <p className='text-xs text-white font-bold'>1</p>
-                    </div>
+                    {
+                        cartItems && cartItems.length > 0 &&
+                        (
+                            <div className='w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-3.5 -right-2'>
+                                <p className='text-xs text-white font-bold'>{cartItems.length}</p>
+                            </div>
+                        )
+                    }
                 </div>
                 <motion.div
                 initial={{opacity:0, scale:0.6}}
@@ -107,9 +112,14 @@ const Header = () => {
         <div onClick={handleBasket} className='flex md:hidden w-full h-full items-start justify-between'>
             <div  className='relative w-10 h-10 flex items-center justify-center '>
                 <MdShoppingBasket className=' text-textColor cursor-pointer text-2xl'/>    
-                <div className='w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-1 -right-1'>
-                    <p className='text-xs text-white font-bold'>1</p>
-                </div>
+                {
+                    cartItems && cartItems.length > 0 &&
+                    (
+                        <div className='w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-3.5 -right-2'>
+                            <p className='text-xs text-white font-bold'>{cartItems.length}</p>
+                        </div>
+                    )
+                }
             </div>
             <Link to='/' className='flex items-center gap-3'>
                 <img src={Logo} className='w-10 object-cover'/>
